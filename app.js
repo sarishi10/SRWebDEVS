@@ -47,13 +47,36 @@ function updateActiveSection() {
  const marker = document.querySelector('.nav-shell').getBoundingClientRect().bottom + 70;
  setActiveSection(sectionAtPosition(navSections.map(s => ({id:s.id,top:s.getBoundingClientRect().top})), marker));
 }
-document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', () => {
+function clearSectionHash() {
+ if (location.hash) history.replaceState(history.state, '', location.pathname + location.search);
+}
+function goToSection(id, animate = true) {
+ const target = document.getElementById(id);
+ if (!target) return;
+ clearSectionHash();
+ target.scrollIntoView({behavior: animate && !reduced ? 'smooth' : 'instant', block:'start'});
+ // Move keyboard focus with the viewport, including the skip link.
+ if (!target.hasAttribute('tabindex')) {
+  target.setAttribute('tabindex', '-1');
+  target.addEventListener('blur', () => target.removeAttribute('tabindex'), {once:true});
+ }
+ target.focus({preventScroll:true});
+ if (navSections.some(s => s.id === id)) {
+  setActiveSection(id);
+  navLockUntil = performance.now() + (animate && !reduced ? 1100 : 0);
+  setTimeout(updateActiveSection, 1150);
+ }
+}
+document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', event => {
+ if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
  const id = a.hash.slice(1);
- if (!navSections.some(s => s.id === id)) return;
- setActiveSection(id);
- navLockUntil = performance.now() + (reduced ? 0 : 1100);
- setTimeout(updateActiveSection, 1150);
+ if (!document.getElementById(id)) return;
+ event.preventDefault();
+ goToSection(id);
 }));
+// Existing shared section links still work, then the address is cleaned.
+const initialSection = location.hash.slice(1);
+if (document.getElementById(initialSection)) requestAnimationFrame(() => goToSection(initialSection, false));
 window.addEventListener('scroll', () => {if (!navFrame) navFrame = requestAnimationFrame(updateActiveSection);}, {passive:true});
 window.addEventListener('resize', updateActiveSection);
 window.addEventListener('hashchange', () => {if (navSections.some(s => `#${s.id}` === location.hash)) setActiveSection(location.hash.slice(1));});
