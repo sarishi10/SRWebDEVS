@@ -8,3 +8,26 @@
 .sandiego{background:radial-gradient(ellipse at 70% 85%,#6d5e58,#322d2c);color:#f8ede4}
 a.linkedin{opacity:1;min-height:44px;display:inline-flex;align-items:center}
 @media(max-width:700px){#navigation>a.active:not(.nav-contact){box-shadow:none}.orange-bridal .preview-wordmark,.sandiego .preview-wordmark{font-size:40px}}
+
+/* Website plans */
+.plan-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
+.plan-card{min-width:0;background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px;display:flex;flex-direction:column;transition:transform .2s,border-color .2s,box-shadow .2s}
+.plan-card:hover{transform:translateY(-3px);border-color:#bfc0c6;box-shadow:0 12px 35px #00000006}
+.plan-card.plan-recommended{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
+.plan-kicker{display:block;font-size:9px;font-weight:600;letter-spacing:.12em;color:var(--muted);margin-bottom:27px}
+.plan-recommended .plan-kicker{color:var(--blue)}
+.plan-card h3{font-size:25px;letter-spacing:-.04em;margin:0 0 18px}
+.plan-price{font-size:clamp(35px,3.4vw,48px);font-weight:600;letter-spacing:-.055em;line-height:1.1;margin-bottom:20px;white-space:nowrap}
+.plan-price>span{font-size:17px;letter-spacing:-.02em;margin-right:5px;font-weight:500}
+.investment .plan-description{font-size:12px;line-height:1.7;margin:0;min-height:62px;max-width:none}
+.plan-features{list-style:none;padding:24px 0 0;margin:24px 0 30px;border-top:1px solid var(--line);font-size:12px;line-height:1.65;flex:1}
+.plan-features li{position:relative;padding-left:22px;margin-bottom:12px}
+.plan-features li:before{content:'✓';position:absolute;left:0;color:#777;font-size:12px}
+.investment .plan-delivery{font-size:12px;min-height:64px;line-height:1.65;margin:0 0 18px;color:var(--ink)}
+.plan-delivery>span{display:block;font-size:9px;letter-spacing:.08em;color:var(--muted);margin-bottom:7px}
+.investment .plan-card .button{width:100%;margin:0 0 20px;justify-content:space-between}
+.investment .plan-note{font-size:10px;line-height:1.8;margin:0;min-height:72px;max-width:none}
+.investment .pricing-tail{font-size:12px;text-align:center;max-width:none;margin:30px 0 0}
+.pricing-tail a{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+@media(max-width:1000px){.plan-grid{gap:12px}.plan-card{padding:23px 19px}.investment .plan-description{min-height:83px}.investment .plan-note{min-height:108px}}
+@media(max-width:760px){.plan-grid{grid-template-columns:1fr;gap:20px}.plan-card{padding:28px}.plan-price{font-size:44px}.investment .plan-description,.investment .plan-note,.investment .plan-delivery{min-height:0}.plan-features{margin-bottom:20px}.plan-kicker{margin-bottom:22px}.investment .pricing-tail{line-height:1.9}}
