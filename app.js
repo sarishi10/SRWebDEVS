@@ -6,12 +6,14 @@ const projects = [
  {name:'Orange Bridal BCH',full:'Orange Bridal BCH',category:'Bridal / Wedding Services / Business Website',description:'A considered digital presence for a bridal and wedding services business in Rawang, bringing its services, gallery and enquiry journey together in one welcoming experience.',features:['Wedding services presentation','Gallery and visit sections','WhatsApp enquiry links','Mobile navigation'],url:'https://sarishi10.github.io/orangebridal/',link:'Visit live website',theme:'orange-bridal',mark:'Orange Bridal',caption:'BRIDAL & WEDDING SERVICES'},
  {name:'Sandiego Wedding',full:'Sandiego Wedding',category:'Bridal / Photography / Business Website',description:'An elegant website for a Kuala Lumpur bridal and wedding company, introducing its bridal collections, wedding packages and photography experience.',features:['Dedicated wedding package pages','Bridal collection pages','Experience and contact pages','English, Chinese and Malay language controls','WhatsApp enquiry links','Mobile navigation'],url:'https://sarishi10.github.io/sandiegobridal/',link:'Visit live website',theme:'sandiego',mark:'Sandiego',caption:'BRIDAL · PHOTOGRAPHY · WEDDING'}
 ];
-function projectCard(p,i){return `<article class="project reveal ${i%2?'reverse':''}"><div class="project-preview ${p.theme}"><div class="preview-top"><span>SRWEBDEVS / PROJECT 0${i+1}</span><span>↗</span></div><div class="preview-geometry" aria-hidden="true"></div><div class="preview-wordmark">${p.mark}<small>${p.caption}</small></div><div class="preview-bottom"><span>PROJECT IDENTITY FRAME</span><span>Screenshot coming soon</span></div></div><div class="project-copy"><span class="micro">SELECTED WORK / 0${i+1}</span><h3>${p.name}</h3><div class="project-category">${p.category}</div><p>${p.description}</p><details><summary>Explore project details <span>+</span></summary><div class="detail-content"><h4>${p.full}</h4><ul>${p.features.map(f=>`<li>${f}</li>`).join('')}</ul>${p.note?`<p>${p.note}</p>`:''}<small>Visual above is a labeled identity placeholder, not a screenshot of the website.</small></div></details>${p.url?`<a class="project-link" href="${p.url}" target="_blank" rel="noopener noreferrer">${p.link} <span>↗</span></a>`:'<span class="project-status">Live link not yet available</span>'}</div></article>`;}
+const projectImages = ['aabco','aiyra','orange','sandiego'];
+function projectCard(p,i){return `<article class="project reveal ${i%2?'reverse':''}"><a class="project-preview screenshot-preview" href="${p.url}" target="_blank" rel="noopener noreferrer" aria-label="Visit ${p.name} website"><div class="browser-frame" aria-hidden="true"><span class="browser-dots">● ● ●</span><span>${new URL(p.url).hostname}</span><span>↗</span></div><img src="assets/${projectImages[i]}.webp" alt="${p.name} website screenshot supplied by SRWebDevs" width="1600" height="800" loading="lazy" decoding="async"><span class="screenshot-caption">${p.name} <span>View live website ↗</span></span></a><div class="project-copy"><span class="micro">SELECTED WORK / 0${i+1}</span><h3>${p.name}</h3><div class="project-category">${p.category}</div><p>${p.description}</p><details><summary>Explore project details <span>+</span></summary><div class="detail-content"><h4>${p.full}</h4><ul>${p.features.map(f=>`<li>${f}</li>`).join('')}</ul>${p.note?`<p>${p.note}</p>`:''}</div></details>${p.url?`<a class="project-link" href="${p.url}" target="_blank" rel="noopener noreferrer">${p.link} <span>↗</span></a>`:'<span class="project-status">Live link not yet available</span>'}</div></article>`;}
 document.querySelector('#projects').innerHTML=projects.map(projectCard).join('');
 const services=[['▣','Corporate Websites','Professional websites that communicate credibility and help businesses establish a strong online presence.'],['◈','E-Commerce Development','Custom online storefronts with intuitive shopping experiences and product management solutions.'],['⌘','Custom Web Applications','Purpose-built digital platforms designed around specific business workflows.'],['↗','Website Maintenance & Deployment','Website updates, hosting setup, domain configuration, performance improvements, and ongoing support.']];
 document.querySelector('#service-grid').innerHTML=services.map((s,i)=>`<a class="service-card reveal" href="#contact"><div class="service-top"><span aria-hidden="true">${s[0]}</span><small>0${i+1}</small></div><h3>${s[1]}</h3><p>${s[2]}</p><span class="service-arrow" aria-hidden="true">↗</span></a>`).join('');
 const steps=[['Discover','Understand your business, objectives, and requirements.'],['Design','Create a modern visual direction and intuitive user experience.'],['Develop','Build a responsive, functional, and performance-focused website.'],['Deploy','Test, refine, and launch your digital experience.']];
-document.querySelector('#process-grid').innerHTML=steps.map((s,i)=>`<div class="process-step reveal"><div><span>0${i+1}</span><span aria-hidden="true">${i===3?'✓':'→'}</span></div><h3>${s[0]}</h3><p>${s[1]}</p></div>`).join('');
+const processGraphics = ['<circle cx="44" cy="39" r="18"/><path d="m57 52 16 16M18 19h15M18 27h9M67 20h10M73 16v8"/><path d="M34 40h7l5-8 7 13"/>', '<rect x="18" y="20" width="62" height="51" rx="5"/><path d="M18 33h62M39 33v38M47 44h24M47 51h16"/><rect x="24" y="41" width="9" height="18" rx="2"/><path d="m59 67 14-14 6 6-14 14-8 2z"/>', '<rect x="15" y="21" width="66" height="50" rx="5"/><path d="M15 33h66m-46 11-9 9 9 9m27-18 9 9-9 9m-10-20-8 22"/><circle cx="23" cy="27" r="1"/><circle cx="29" cy="27" r="1"/>', '<path d="M49 17c12 6 19 20 18 34L49 64 31 51c-1-14 6-28 18-34z"/><circle cx="49" cy="37" r="7"/><path d="m32 43-12 8v17l17-9m29-16 12 8v17-1l-17-9M42 65v12m7-10v17m7-19v12"/>'];
+document.querySelector('#process-grid').innerHTML=steps.map((s,i)=>`<div class="process-step reveal"><div class="process-number"><span>0${i+1}</span><span aria-hidden="true">${i===3?'✓':'→'}</span></div><svg class="process-graphic" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${processGraphics[i]}</svg><h3>${s[0]}</h3><p>${s[1]}</p></div>`).join('');
 const toggle=document.querySelector('#menu-toggle'),nav=document.querySelector('#navigation');
 function closeMenu(){toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Open navigation');nav.classList.remove('open');}
 toggle.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')!=='true';toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'Close navigation':'Open navigation');nav.classList.toggle('open',open);});
@@ -81,3 +83,28 @@ window.addEventListener('scroll', () => {if (!navFrame) navFrame = requestAnimat
 window.addEventListener('resize', updateActiveSection);
 window.addEventListener('hashchange', () => {if (navSections.some(s => `#${s.id}` === location.hash)) setActiveSection(location.hash.slice(1));});
 updateActiveSection();
+
+// Plan selection is independent of the recommended offer.
+const planCards = [...document.querySelectorAll('.plan-card')];
+function selectPlan(card) {
+ planCards.forEach(item => {
+  const selected = item === card;
+  item.classList.toggle('plan-selected', selected);
+  const control = item.querySelector('.plan-select');
+  control.setAttribute('aria-pressed', String(selected));
+  control.innerHTML = `${selected ? 'Selected' : 'Select plan'} <span aria-hidden="true">${selected ? '✓' : '+'}</span>`;
+  item.querySelector('.plan-bottom a').classList.toggle('primary', selected);
+  item.querySelector('.plan-bottom a').classList.toggle('subtle', !selected);
+ });
+}
+planCards.forEach(card => {
+ const button = document.createElement('button');
+ button.type = 'button'; button.className = 'plan-select';
+ button.setAttribute('aria-label', `Select ${card.querySelector('h3').textContent} plan`);
+ button.setAttribute('aria-pressed', 'false');
+ button.innerHTML = 'Select plan <span aria-hidden="true">+</span>';
+ card.querySelector('.plan-top').append(button);
+ button.addEventListener('click', () => selectPlan(card));
+ card.addEventListener('click', event => { if (!event.target.closest('a,button')) selectPlan(card); });
+ card.querySelector('.plan-bottom a').addEventListener('click', () => selectPlan(card));
+});
